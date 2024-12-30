@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POKOJOGO</title>
+    <link rel="stylesheet" href="./Style.css">
+</head>
+<body>
+    <div class="section" id="botones">
+        <button id="jugar" onclick="jugar()">Jugar</button>
+    </div>
+    
+
+    <div class="section">
+        <h3 id="ME">Mano de Experto</h3>
+        <!-- FICHAS (PENDIENTE) <h5>FICHAS: 20M</h5> -->
+        <div class="cards-container" id="Maquina">
+            <!-- Cartas de la máquina -->
+            <div class="card"><img src="imagenes/KCorazon.png" alt="Carta Detras"></div>
+            <div class="card"><img src="imagenes/AsPica.png" alt="Carta Detras"></div>
+        </div>
+    </div>
+
+    <div class="section" id="sectionGanador">
+        <div id="ganador">
+            <!-- Preferimos no indicar la mesa por su nombre <h3 id="MM">Mesa</h3> -->
+        </div>
+        <div class="cards-container" id="Mesa">
+            <!-- Cartas en la mesa -->
+            <div class="card"><img src="imagenes/JDiamante.png" alt="Carta Detras"></div>
+            <div class="card"><img src="imagenes/10Diamante.png" alt="Carta Detras"></div>
+            <div class="card"><img src="imagenes/QDiamante.png" alt="Carta Detras"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <!-- FICHAS (PENDIENTE) <h5>FICHAS: 100M</h5> -->
+        <div class="cards-container" id="Jugador">
+            <!-- Cartas del jugador -->
+            <div class="card"><img src="imagenes/AsDiamante.png" alt="Carta Detras"></div>
+            <div class="card"><img src="imagenes/KDiamante.png" alt="Carta Detras"></div>
+        </div>
+        <h3 id="MJ">Mano de Jugador</h3>
+        
+    </div>
+    <script src="Main.js"></script>
+</body>
+
+</html>

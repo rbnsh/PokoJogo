@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #192025;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+img{
+    width: 110px;
+    height: 130px;
+}
+#MJ {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #01ffc0;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+#ME {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #ffe600fb;
+    margin-bottom: 15px;
+    margin-top: 25px;
+}
+
+#MM {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #ffd501;
+    margin-bottom: 20px;
+}
+
+
+h5{
+    font-size: 14px;
+    margin: 15px;
+}
+
+h4{
+    font-size: 25px;
+    color: red;
+}
+
+.section {
+    margin: 5px 0;
+    text-align: center;
+}
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 0px 0;
+}
+
+#ganador{
+    margin-top: 40px;
+    
+}
+
+#sectionGanador{
+    margin-bottom: 40px;
+}
+.card {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 80px;
+    height: 90px;
+    background-color: #34495e;
+    border: 2px solid #7f8c8d;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ecf0f1;
+    font-size: 18px;
+    font-weight: bold;
+}
+button {
+    font-weight: bold;
+    background-color: #c70202;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #ffffff;
+    color: rgb(255, 0, 0);
+}
