@@ -15,6 +15,8 @@ img{
     width: 110px;
     height: 130px;
 }
+
+/*Ajusta la mano del jugador*/
 #MJ {
     text-transform: uppercase;
     font-size: 15px;
@@ -23,6 +25,7 @@ img{
     margin-top: 20px;
 }
 
+/*Ajusta la mano de la maquina/experto */
 #ME {
     text-transform: uppercase;
     font-size: 15px;
@@ -31,6 +34,7 @@ img{
     margin-top: 25px;
 }
 
+/*Ajusta la mano de la mesa*/
 #MM {
     text-transform: uppercase;
     font-size: 20px;

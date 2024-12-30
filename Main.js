@@ -1,18 +1,15 @@
 // ** VARIABLES ** //
-var FICHAS_JUGADOR = 300;
-var FICHAS_MAQUINA = 300;
-var CIEGA = 25;
-var RONDA = 0;
-var MAZO = [];
-var MAZO_PROV = [];
-var MANO_JUGADOR = [];
-var MANO_MAQUINA = [];
-var MANO_MESA = [];
-var TURNO = true;
-var JUGAR = true;
-var APUESTA = 0;
-var RETIRO_JUGADOR = false;
-var RETIRO_MAQUINA = false;
+var FICHAS_JUGADOR = 300; // Variable integer que contiene las fichas del jugador (pendiente de integrar).
+var FICHAS_MAQUINA = 300; // Variable integer que contiene las fichas de la maquina (pendiente de integrar).
+var CIEGA = 25; // Variable integer que contiene la ciega a jugar (pendiente de integrar).
+var RONDA = 0; // Variable integer que contiene la ronda actual.
+var MAZO = []; // Variable Array que contiene el mazo barajado.
+var MAZO_PROV = []; // Variable Array que contiene el mazo ordenado.
+var MANO_JUGADOR = []; // Variable Array que contiene la mano del jugador
+var MANO_MAQUINA = []; // Variable Array que contiene la mano de la maquina
+var MANO_MESA = []; // Variable Array que contiene las cartas de la mesa
+var TURNO = true; // Variable boolean que indica si es turno del jugador o de la maquina para decidir apostar, pasar, abandonar... (pendiente de integrar).
+var JUGAR = true; // Variable boolean que indica si el jugador le ha dado al boton jugar.
 
 // ** CLASES ** //
 
@@ -63,7 +60,7 @@ const CrearCartas = () =>
                 palo = "Diamante";
             }
     
-            //Nombre y puntos de la carta
+            // Nombre y puntos de la carta
             switch(j)
             {
                 case 1: nombre = "As"; puntos = 14; break;
@@ -80,31 +77,39 @@ const CrearCartas = () =>
                 case 12: nombre = "Q"; puntos = 12; break;
                 case 13: nombre = "K"; puntos = 13; break;
             }
-            imagenFrontal = `<img src="./imagenes/${nombre}${palo}.png" />`
-            MAZO_PROV.push(new Carta(nombre, palo, puntos, imagenFrontal, imagenTrasera))
+
+            // Indicamos la imagen frontal unica a traves del nombre y palo de la carta 
+            imagenFrontal = `<img src="./imagenes/${nombre}${palo}.png" />`;
+
+            // Intorducimos el objeto carta dentro de mazo_prov
+            MAZO_PROV.push(new Carta(nombre, palo, puntos, imagenFrontal, imagenTrasera));
         }
     }
 }
 
 /*
-    Funcion que desordena las cartas y las añade al array Mazo
+    Funcion que desordena las cartas y las añade al array Mazo.
 */
 const DesordenarCartas = () =>
 {
-    const OriginalLength = MAZO_PROV.length;
+    let OriginalLength = MAZO_PROV.length; // Contiene la longitud original de mazo_prov.
     for(let i=0; i<OriginalLength; i++)
     {
-        let random = Math.floor(Math.random() * MAZO_PROV.length);
-        MAZO.push(MAZO_PROV[random]);
-        MAZO_PROV.splice(random, 1);
+        let random = Math.floor(Math.random() * MAZO_PROV.length); // Generamos un numero al azar dentro de la longitud dinamica de mazo_prov.
+        MAZO.push(MAZO_PROV[random]); // Introducimos la carta dentro de mazo.
+        MAZO_PROV.splice(random, 1); // Eliminamos el espacio vacío dejado en mazo_prov.
     }
 }
 
+/*
+    - Función que reparte las cartas a los jugadores
+*/
 const RepartirCartas = () =>
 {
     for(let i=0; i<=3; i++)
     {
-        if(i%2==0 || i==0)
+        // Para simular al poker real, intercalamos las cartas entre los jugadores
+        if(i%2==0)
         {
             MANO_JUGADOR.push(MAZO[i]);
             MAZO.splice(i, 1);
@@ -116,9 +121,12 @@ const RepartirCartas = () =>
         }
     }
 }
-
+/*
+    Función que contiene la logica de lanzar cartas a la mesa
+*/
 const LanzarCartasMesa = () => 
 {
+    // Si la ronda es 1, repartimos 3 cartas seguidas a la mesa
     if(RONDA == 1)
     {
         for(let i=0; i<3; i++)
@@ -127,6 +135,7 @@ const LanzarCartasMesa = () =>
             MAZO.splice(i, 1);
         }
     }
+    // Si es la 2 o 3, repartimos solo 1 por ronda a la mesa.
     else if(RONDA == 2 || RONDA == 3)
     {
         MANO_MESA.push(MAZO[0]);
@@ -134,6 +143,10 @@ const LanzarCartasMesa = () =>
     }
 }
 
+/*
+    - Función que evalua cual es la mano jugada y devulve un objeto con el nombre, puntucion de la mano, suma total de puntos de las cartas y puntosTrio dependiendo de la mano.
+    @mano => parametro que contiene el array de la mano del jugador
+*/
 const evaluarMano = (mano) => {
     
     let manoFinal = mano.concat(MANO_MESA); // Concatenamos la mano del jugador con las cartas de la mesa
@@ -285,11 +298,16 @@ const evaluarMano = (mano) => {
 };
 
 
+/*
+    - Funcion que evalua la mano ganadora.
+*/
 const ManoGanadora = () => 
 {
+    // Vemos cuales son las manos de los jugadores.
     let manoJugador = evaluarMano(MANO_JUGADOR);
     let manoMaquina = evaluarMano(MANO_MAQUINA);
 
+    // Creamos el texto en el que mostraremos quien ha ganado.
     let ganador = document.createElement("h4");
     ganador.setAttribute("id", "textoGanador");
     
@@ -367,6 +385,10 @@ const mostrarCartas = () => {
     });
 }
 
+/*
+    - Funcion que contiene la logica de apostar en el juego.
+    - Por ahora, solo realiza la accion del boton temporal siguiente.
+*/
 const Apostar = () =>
 {
     RONDA++;
@@ -378,6 +400,9 @@ const Apostar = () =>
 
 }
 
+/*
+    - Función que que contiene la logica del fin del juego.
+*/
 const FinDelJuego = () =>
 {
     ManoGanadora();
@@ -397,21 +422,25 @@ const FinDelJuego = () =>
     });
 
 
+    // Si existe el boton apostar o siguiente, lo eliminamos.
     if(document.getElementById("apostar"))
     {
         document.getElementById("apostar").remove();
     }
-
+    
+    /* Pendiente de integrar 
     if(FICHAS_JUGADOR < 30)
     {
-        //document.getElementById("textoGanador").innerHTML = "MAQUINA HA GANADO";
+        document.getElementById("textoGanador").innerHTML = "MAQUINA HA GANADO";
     }
 
     if(FICHAS_MAQUINA < 30)
     {
-        //document.getElementById("textoGanador").innerHTML = "JUGADOR HA GANADO";
+        document.getElementById("textoGanador").innerHTML = "JUGADOR HA GANADO";
     }
-
+    */
+   
+    // Si las fichas se consideran suficientes para pasar de ronda, creamos el boton "Siguiente Ronda". Pendiente de completar.
     if(FICHAS_JUGADOR && FICHAS_MAQUINA > 30)
     {
         let BotonApostar = document.createElement('button');
@@ -423,12 +452,20 @@ const FinDelJuego = () =>
 
 }
 
+/*
+    - Función pendiente de implementar. 
+*/
 const SiguienteRonda = () => {
     alert("Pendiente de implementar...");
 }
 
+
+/*
+    - Función en la que se ejecuta el juego.
+*/
 const jugar = () => {
 
+    // Contiene la lógica del botón "jugar".
     if(JUGAR){
         
         // Crear y desordenar cartas
@@ -446,9 +483,10 @@ const jugar = () => {
 
         /* Gestion botones */
 
+        // Cuando el jugador pulsa en jugar, este boton ahora será de salir partida.
         document.getElementById("jugar").innerText = "Salir Partida"; // Boton jugar/salir
 
-        // Crear boton de apostar
+        // Crear boton de apostar (por ahora, el boton se llama siguiente y se usa para avanzar en la mano)
         let BotonApostar = document.createElement('button');
         BotonApostar.setAttribute('id', 'apostar');
         BotonApostar.setAttribute('onclick', 'Apostar()');
@@ -457,8 +495,10 @@ const jugar = () => {
         
         JUGAR = false;
 
+    // Contiene la logica del boton "Salir Partida"
     } else {
 
+        // Si existen botones o textos que no interesen, se eliminan para volver a jugar.
         if(document.getElementById("Siguiente"))
         {
             document.getElementById("Siguiente").remove();
@@ -470,6 +510,7 @@ const jugar = () => {
             document.getElementById("textoGanador").remove();
         }
 
+        // Se resetean las variables y el boton actual pasa a llamarse de nuevo "Jugar".
         FICHAS_JUGADOR = 300;
         FICHAS_MAQUINA = 300;
         CIEGA = 25;
@@ -481,10 +522,7 @@ const jugar = () => {
         MANO_MESA = [];
         TURNO = true;
         JUGAR = true;
-        APUESTA = 0;
-        RETIRO_JUGADOR = false;
-        RETIRO_MAQUINA = false;
-        document.getElementById("jugar").innerText = "Jugar"
+        document.getElementById("jugar").innerText = "Jugar";
         
     }
     

@@ -1,0 +1,6 @@
+- ¡Bienvenido a mi humilde proyecto vacacional de videojuego de poker-solitario en construcción!
+- El juego te permite enfrentar a la mano experto en una partida de una sola ronda.
+- Por ahora, no se contemplan todas las posibilidades en el poker Texas Hold'em, pero sí las mas importantes.
+- La idea es poder integrar en un futuro apuestas y rondas, asi como turnos para la maquina y el jugador como también desafios.
+- ¡No te asustes!, ya que el codigo es mejorable. Por ejemplo, implementar funciones locales para no repetir codigo en ciertas partes. Esta fase de modulación se llevará a cabo proximamente.
+- ¡Muchas gracias!
